@@ -9,7 +9,7 @@ dependencies = [
 requires-python = ">= 3.11"
 
 [build-system]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 requires = ["setuptools>=64"]
 
 [tool.setuptools.packages.find]
