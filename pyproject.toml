@@ -1,24 +1,16 @@
 [project]
-authors = [{name = "Daniel San José Pro", email = "42489409+danielsanjosepro@users.noreply.github.com"}]
-dependencies = []
-name = "lerobot_policy_ditflow"
-requires-python = ">= 3.11"
+name = "lerobot_policy_v_jepa_2"
 version = "0.1.0"
+dependencies = [
+    "torch>=2.0",
+    "timm",
+    "einops",
+]
+requires-python = ">= 3.11"
 
 [build-system]
-build-backend = "hatchling.build"
-requires = ["hatchling"]
+build-backend = "setuptools.backends._legacy:_Backend"
+requires = ["setuptools>=64"]
 
-[tool.pixi.workspace]
-channels = ["conda-forge"]
-platforms = ["linux-64"]
-
-[tool.pixi.pypi-dependencies]
-lerobot_policy_ditflow = { path = ".", editable = true }
-lerobot = { path = "../lerobot", editable = true }
-
-[tool.pixi.tasks]
-
-[tool.pixi.dependencies]
-pynput = ">=1.8.1,<2"
-rerun-sdk = ">=0.24.0"
+[tool.setuptools.packages.find]
+where = ["src"]
