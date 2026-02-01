@@ -114,13 +114,16 @@ class DiTFlowConfig(PreTrainedConfig):
 
     # Architecture / modeling.
     # Vision backbone.
-    vision_backbone: str = "resnet18"
+    vision_backbone: str = "vjepa2"
     crop_shape: tuple[int, int] | None = (84, 84)
     crop_is_random: bool = True
     pretrained_backbone_weights: str | None = None
     use_group_norm: bool = True
     spatial_softmax_num_keypoints: int = 32
     use_separate_rgb_encoder_per_camera: bool = False
+    # V-JEPA2 settings (used when vision_backbone == "vjepa2")
+    vjepa2_model: str = "vjepa2_vit_large"
+    vjepa2_feature_dim: int = 512
 
     # Diffusion Transformer (DiT) parameters.
     frequency_embedding_dim: int = 256
@@ -154,9 +157,9 @@ class DiTFlowConfig(PreTrainedConfig):
         super().__post_init__()
 
         """Input validation (not exhaustive)."""
-        if not self.vision_backbone.startswith("resnet"):
+        if not self.vision_backbone.startswith("resnet") and self.vision_backbone != "vjepa2":
             raise ValueError(
-                f"`vision_backbone` must be one of the ResNet variants. Got {self.vision_backbone}."
+                f"`vision_backbone` must be one of the ResNet variants or 'vjepa2'. Got {self.vision_backbone}."
             )
 
         if self.training_noise_sampling not in ("uniform", "beta"):
